@@ -1,5 +1,5 @@
 import React from 'react'
-import {weatherDescMap, prepareImg} from 'app\\modules\\weathercodes.js'
+import {weatherDescMap, prepareImg} from '../../modules/weathercodes'
 
 export default function tomorrow({WeatherProp}:any) {
   return (

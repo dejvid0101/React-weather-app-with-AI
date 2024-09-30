@@ -2,13 +2,15 @@ import React, { useState, useRef } from 'react'
 import { Autocomplete } from './autocomplete'
 import ResultsModal from './resultsmodal'
 
-
+interface AutocompleteHandle {
+    handleKeyboard: (event: any) => void;
+  }  
 
 export default function searchBar({ CitiesObj }: any) {
     const [toggleResultsModal, setTRM] = useState(false);
     const [autoComplete, setAutoComplete] = useState([]);
     const [inputValue, setInputValue] = useState("");
-    const autocompleteCompRef = useRef();
+    const autocompleteCompRef = useRef<AutocompleteHandle | null>();
 
     function onSearch(){
         setTRM(true);

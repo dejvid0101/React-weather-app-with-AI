@@ -1,5 +1,5 @@
 import React from 'react'
-import {weatherDescMap, prepareImg} from 'app\\modules\\weathercodes.js'
+import {weatherDescMap, prepareImg} from '../../modules/weathercodes'
 
 
 export default function currentweather({WeatherProp}:any) {
@@ -14,7 +14,7 @@ export default function currentweather({WeatherProp}:any) {
 
         {/* weathertype */}
         <div className='flex items-center justify-center'>
-          <img className='w-1/2' src={prepareImg(WeatherProp.current_weather.weathercode)}></img>
+          <img className='w-1/2' src={WeatherProp.current.condition.icon}></img>
   
         </div>
         {/* wind speed and direction */}

@@ -11,9 +11,9 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
   //state for keyboard selection 
   const [HighlightedSuggestion, setHighlightedSuggestion] = useState('');
 
-  const Link1 = useRef(null);
-  const Link2 = useRef(null);
-  const Link3 = useRef(null);
+  const Link1 = useRef<HTMLAnchorElement | null>(null);
+  const Link2 = useRef<HTMLAnchorElement | null>(null);
+  const Link3 = useRef<HTMLAnchorElement | null>(null);
 
   //exposing function
   useImperativeHandle(ref, () => ({

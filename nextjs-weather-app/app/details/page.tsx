@@ -6,26 +6,32 @@ import TomorrowComponent from './components/tomorrow_component';
 
 //ADD ERROR HANDLING FOR WHEN URL PARAMETER IS NOT SUPPLIED
 
-async function fetchCoordinates(cityName:any) {
-  const responseCoordinates=await fetch('https://api.opencagedata.com/geocode/v1/json?q='+cityName+'&key=dfbba9f7d48b4dbfb72e5ff1ae21d4ad',
-{cache:'no-store'});
-const dataCoordinates=await responseCoordinates.json();
-return dataCoordinates;
+async function getWeatherInfo(cityName: any) {
+  // Construct the URL for the WeatherAPI with the city name and API key
+  const weatherApiKey = 'b354bae2692245ab994190139241103'; // API key
+  const weatherApiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${cityName}&days=3`;
+
+  try {
+      // Fetch the weather data for the given city
+      const responseWeather = await fetch(weatherApiUrl, { cache: 'no-store' });
+
+      // Check if the request was successful
+      if (!responseWeather.ok) {
+          throw new Error('Error fetching weather data');
+      }
+
+      // Parse the response as JSON
+      const dataWeather = await responseWeather.json();
+
+      // Return the fetched weather data
+      return dataWeather;
+
+  } catch (error) {
+      // Handle any errors that occur during the fetch
+      console.error('Error fetching weather data:', error);
+      return null; // Or handle the error as needed
+  }
 }
-
-async function getWeatherInfo(cityName:any){
-//fetch object with coordinates based on city name in request params
-const fetchedCityObj=await fetchCoordinates(cityName);
-const lat=fetchedCityObj.results[0].geometry.lat;
-const lng=fetchedCityObj.results[0].geometry.lng;
-
-//fetch current weather object based on coordinates
-const responseWeather=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'&current_weather=true&daily=weathercode&daily=temperature_2m_min&daily=temperature_2m_max&timezone=auto&daily=apparent_temperature_max&daily=apparent_temperature_min&daily=precipitation_probability_max',
-{cache:'no-store'});
-const dataWeather=await responseWeather.json();
-return dataWeather;
-}
-
 
 //page server component receives url params through props
 export default async function page({searchParams}: {searchParams?: { [key: string]: string | string[] | undefined };}) {

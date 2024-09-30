@@ -11,11 +11,11 @@ export default function resultsmodal({ toggle, citiesObj, closeFn, input }: { to
 
         //unblur bg
         for (let i = 0; i < document.getElementsByClassName('content').length; i++) {
-            document.getElementsByClassName('content')[i].style.filter = 'none';
+            (document.getElementsByClassName('content')[i] as HTMLElement).style.filter = 'none';
 
         };
-        document.getElementsByClassName('modalPlaceholder')[0].style.visibility = 'hidden';
-        document.getElementsByClassName('modalPlaceholder')[0].style.zIndex = '-10';
+        (document.getElementsByClassName('modalPlaceholder')[0] as HTMLElement).style.visibility = 'hidden';
+        (document.getElementsByClassName('modalPlaceholder')[0] as HTMLElement).style.zIndex = '-10';
 
         //close modal by calling fn from parent component
         closeFn();
@@ -66,11 +66,11 @@ export default function resultsmodal({ toggle, citiesObj, closeFn, input }: { to
 
         //blur bg before rendering
         for (let i = 0; i < document.getElementsByClassName('content').length; i++) {
-            document.getElementsByClassName('content')[i].style.filter = 'blur(5px)';
+            (document.getElementsByClassName('content')[i] as HTMLElement).style.filter = 'blur(5px)';
 
         };
-        document.getElementsByClassName('modalPlaceholder')[0].style.visibility = 'visible';
-        document.getElementsByClassName('modalPlaceholder')[0].style.zIndex = '10';
+        (document.getElementsByClassName('modalPlaceholder')[0] as HTMLElement).style.visibility = 'visible';
+        (document.getElementsByClassName('modalPlaceholder')[0] as HTMLElement).style.zIndex = '10';
 
         return (
             // renders modal inside body instead of navbar

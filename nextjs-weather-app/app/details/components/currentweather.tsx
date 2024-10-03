@@ -19,13 +19,13 @@ export default function currentweather({WeatherProp}:any) {
         </div>
         {/* wind speed and direction */}
         <div className='text-xl font-poppins flex items-center justify-center'>
-        {weatherDescMap.get(WeatherProp.current_weather.weathercode.toString())}
+        {WeatherProp.current.condition.text}
         </div>
 
       </div>
       {/* temp */}
       <div className='flex items-center justify-center'>
-        <div className='font-poppins text-6xl'>{WeatherProp.current_weather.temperature}°C</div>
+        <div className='font-poppins text-6xl'>{WeatherProp.current.temp_c}°C</div>
       </div>
 
 
@@ -33,7 +33,7 @@ export default function currentweather({WeatherProp}:any) {
 
    
     <div className='font-poppins text-slate-700 flex items-center'>
-      <div>{WeatherProp.current_weather.time.substring(11)} local time</div>
+      <div>{WeatherProp.location.localtime.substring(11)} local time</div>
     </div>
     
   </div>

@@ -22,16 +22,16 @@ export default function forecast3days({ WeatherProp }: any) {
         </div>
         <div className='row-span-5 grid grid-cols-3'>
           <div className='flex justify-center'>
-            <img className='h-5/6' src={prepareImg(WeatherProp.daily.weathercode[2])}></img>
+            <img className='h-5/6' src={WeatherProp.forecast.forecastday[0].day.condition.icon}></img>
           </div>
           <div className='flex justify-center'>
-            <p className='h-2/6 mt-6 font-poppins text-xl'>{weatherDescMap.get(WeatherProp.daily.weathercode[2].toString())}</p>
+            <p className='h-2/6 mt-6 font-poppins text-xl'>{WeatherProp.forecast.forecastday[0].day.condition.text}</p>
 
           </div>
           <div className='flex justify-center'>
             <div className='h-2/6 mt-6'>
-              <span className='font-poppins text-4xl'>{WeatherProp.daily.temperature_2m_max[2]}°C</span>
-              <span className='font-poppins'>/{WeatherProp.daily.temperature_2m_min[2]}°C</span>
+              <span className='font-poppins text-4xl'>{WeatherProp.forecast.forecastday[0].day.maxtemp_c}°C</span>
+              <span className='font-poppins'>/{WeatherProp.forecast.forecastday[0].day.mintemp_c}°C</span>
             </div>
           </div>
         </div>
@@ -43,15 +43,15 @@ export default function forecast3days({ WeatherProp }: any) {
         </div>
         <div className='row-span-5 grid grid-cols-3'>
           <div className='flex justify-center'>
-            <img className='h-5/6' src={prepareImg(WeatherProp.daily.weathercode[3])}></img>
+            <img className='h-5/6' src={WeatherProp.forecast.forecastday[1].day.condition.icon}></img>
           </div>
           <div className='flex justify-center'>
-            <p className='h-2/6 mt-6 font-poppins text-xl'>{weatherDescMap.get(WeatherProp.daily.weathercode[3].toString())}</p>
+            <p className='h-2/6 mt-6 font-poppins text-xl'>{WeatherProp.forecast.forecastday[1].day.condition.text}</p>
           </div>
           <div className='flex justify-center'>
             <div className='h-2/6 mt-6'>
-              <span className='font-poppins text-4xl'>{WeatherProp.daily.temperature_2m_max[3]}°C</span>
-              <span className='font-poppins'>/{WeatherProp.daily.temperature_2m_min[3]}°C</span>
+              <span className='font-poppins text-4xl'>{WeatherProp.forecast.forecastday[1].day.maxtemp_c}°C</span>
+              <span className='font-poppins'>/{WeatherProp.forecast.forecastday[1].day.mintemp_c}°C</span>
             </div>
           </div>
         </div>
@@ -63,15 +63,15 @@ export default function forecast3days({ WeatherProp }: any) {
         </div>
         <div className='row-span-5 grid grid-cols-3'>
           <div className='flex justify-center'>
-            <img className='h-5/6' src={prepareImg(WeatherProp.daily.weathercode[4])}></img>
+            <img className='h-5/6' src={WeatherProp.forecast.forecastday[2].day.condition.icon}></img>
           </div>
           <div className='flex justify-center'>
-            <p className='h-2/6 mt-6 font-poppins text-xl'>{weatherDescMap.get(WeatherProp.daily.weathercode[4].toString())}</p>
+            <p className='h-2/6 mt-6 font-poppins text-xl'>{WeatherProp.forecast.forecastday[2].day.condition.text}</p>
           </div>
           <div className='flex justify-center'>
             <div className='h-2/6 mt-6'>
-              <span className='font-poppins text-4xl'>{WeatherProp.daily.temperature_2m_max[4]}°C</span>
-              <span className='font-poppins'>/{WeatherProp.daily.temperature_2m_min[4]}°C</span>
+              <span className='font-poppins text-4xl'>{WeatherProp.forecast.forecastday[2].day.maxtemp_c}°C</span>
+              <span className='font-poppins'>/{WeatherProp.forecast.forecastday[2].day.maxtemp_c}°C</span>
             </div>
           </div>
         </div>

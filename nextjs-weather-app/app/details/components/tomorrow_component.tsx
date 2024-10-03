@@ -32,14 +32,12 @@ export default function tomorrow({WeatherProp}:any) {
         <div className='grid grid-rows-4 [grid-row:span_2;]'>
         <div className='font-poppins text-slate-500'>Day</div>
           <div className='[grid-row:span_2;] font-poppins text-3xl xl:text-6xl'>{WeatherProp.forecast.forecastday[1].day.maxtemp_c}°C</div>
-          <div className='font-poppins text-slate-500 text-sm'>Temp feel: {WeatherProp.forecast.forecastday[1].day.feelslike_c}</div>
         </div>
       
         
         <div className='grid grid-rows-4 [grid-row:span_2;]'>
         <div className='font-poppins text-slate-500'>Night</div>
           <div className='[grid-row:span_2;] font-poppins text-3xl xl:text-6xl'>{WeatherProp.forecast.forecastday[1].day.mintemp_c}°C</div>
-          <div className='font-poppins text-slate-500 text-sm'>Temp feel: {WeatherProp.forecast.forecastday[1].day.feelslike_c}</div>
         </div>
       </div>
 

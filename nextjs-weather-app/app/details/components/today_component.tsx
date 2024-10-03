@@ -4,7 +4,7 @@ import {weatherDescMap, prepareImg} from '../../modules/weathercodes'
 export default function today_component({WeatherProp}:any) {
   return (
     <>
-    <div className='grid [grid-template-rows:repeat(12,minmax(0,1fr))] lg:my-16 float-left inline w-11/12 antialiased h-96 bg-white border-2 border-indigo-400 rounded-md'>
+    <div className='grid [grid-template-rows:repeat(12,minmax(0,1fr))] xl:my-16 float-left inline w-11/12 antialiased h-96 bg-white border-2 border-indigo-400 rounded-md'>
       <div className='text-slate-700 flex justify-center items-center'>
         <div className='font-poppins text-lg'>TODAY</div>
       </div>
@@ -32,14 +32,12 @@ export default function today_component({WeatherProp}:any) {
         <div className='grid grid-rows-4 [grid-row:span_2;]'>
         <div className='font-poppins text-slate-500'>Day</div>
           <div className='[grid-row:span_2;] font-poppins text-3xl xl:text-6xl'>{WeatherProp.forecast.forecastday[0].day.maxtemp_c}°C</div>
-          <div className='font-poppins text-slate-500 text-sm'>Temp feel: {WeatherProp.forecast.forecastday[0].day.feelslike_c}</div>
         </div>
       
         
         <div className='grid grid-rows-4 [grid-row:span_2;]'>
         <div className='font-poppins text-slate-500'>Night</div>
           <div className='[grid-row:span_2;] font-poppins text-3xl xl:text-6xl'>{WeatherProp.forecast.forecastday[0].day.mintemp_c}°C</div>
-          <div className='font-poppins text-slate-500 text-sm'>Temp feel: {WeatherProp.forecast.forecastday[0].day.feelslike_c}</div>
         </div>
       </div>
 

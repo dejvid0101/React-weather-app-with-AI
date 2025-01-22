@@ -85,43 +85,51 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
     }
   }));
 
-  //read existing cities from browser storage and add current
-  function saveCityToStorage(pos:number) {
-
+  function saveCityToStorage(pos: number) {
     let citiesArr = [];
     const JSONCities = localStorage.getItem('cities');
+    
     if (JSONCities != null) {
-
-      //if cities exist, save to array & push new city BUT FIRST clear oldest city
+      // Parse the existing cities from local storage
       const lastArr = JSON.parse(JSONCities);
-
-      if (lastArr.length > 4) {
-        lastArr.shift();
-      }
-
-      //add city on selected position in suggestion list
-      lastArr.push({
-        name: AutocompleteProps[pos].name,
-        country: AutocompleteProps[pos].country,
-        subcountry: AutocompleteProps[pos].subcountry
-      });
-      citiesArr = lastArr;
-    } else {
-
-      citiesArr.push(
-        {
+  
+      // Check if the city already exists in storage
+      const cityExists = lastArr.some(
+        (city: any) =>
+          city.name === AutocompleteProps[pos].name &&
+          city.country === AutocompleteProps[pos].country &&
+          city.subcountry === AutocompleteProps[pos].subcountry
+      );
+  
+      if (!cityExists) {
+        // Remove the oldest city if the array has more than 4 cities
+        if (lastArr.length > 4) {
+          lastArr.shift();
+        }
+  
+        // Add the new city
+        lastArr.push({
           name: AutocompleteProps[pos].name,
           country: AutocompleteProps[pos].country,
-          subcountry: AutocompleteProps[pos].subcountry
-        }
-      );
-
+          subcountry: AutocompleteProps[pos].subcountry,
+        });
+      }
+  
+      citiesArr = lastArr;
+    } else {
+      // Add the first city if no cities are stored yet
+      citiesArr.push({
+        name: AutocompleteProps[pos].name,
+        country: AutocompleteProps[pos].country,
+        subcountry: AutocompleteProps[pos].subcountry,
+      });
     }
-
+  
+    // Save the updated array to local storage
     localStorage.setItem('cities', JSON.stringify(citiesArr));
     console.log(localStorage.getItem('cities'));
-
-  };
+  }
+  
 
   if (AutocompleteProps.length > 2) {
     return (

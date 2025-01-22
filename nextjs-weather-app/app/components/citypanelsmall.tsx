@@ -7,7 +7,7 @@ function citypanelsmall({WeatherInfo}:any) {
   return (
     <div id="citypanelsmall" className=" grid grid-cols-2 grid-rows-2 bg-gradient-to-r from-slate-50 to-slate-200 h-56 w-96 rounded-lg" >
       <div className="font-sans font-semibold text-4xl justify-center flex items-center" id="panelsmname">
-        <p>Zagreb</p>
+        <p>{WeatherInfo.cityName}</p>
         </div>
       <div className='mt-5 flex justify-center items-center' id="panelsmweather">
         <img className='w-full' src={WeatherInfo.imgSrc}></img>

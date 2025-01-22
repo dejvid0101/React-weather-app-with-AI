@@ -63,7 +63,7 @@ export default function searchBar({ CitiesObj }: any) {
     function changeStates(e: any) {
         // pass data to autocomplete
         handleAutocomplete(e);
-        //pass current field value to state so clearAutocomplete func can clear input field
+        //pass current field value to state so clearAutocomplete function can clear input field
         setInputValue(e.target.value);
     }
 

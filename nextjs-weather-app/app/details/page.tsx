@@ -4,7 +4,6 @@ import Forecast3days from './components/forecast3days'
 import TodayComponent from './components/today_component';
 import TomorrowComponent from './components/tomorrow_component';
 
-//ADD ERROR HANDLING FOR WHEN URL PARAMETER IS NOT SUPPLIED
 
 async function getWeatherInfo(cityName: any) {
   // Construct the URL for the WeatherAPI with the city name and API key

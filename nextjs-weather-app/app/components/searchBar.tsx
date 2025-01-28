@@ -53,8 +53,6 @@ export default function searchBar({ CitiesObj }: any) {
             recentArray[0].clearInput = clearAutocomplete;
             setAutoComplete(recentArray);
 
-        } else {
-
         }
 
     }

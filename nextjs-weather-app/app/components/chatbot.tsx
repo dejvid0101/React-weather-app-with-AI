@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { delay } from '../../modules/weathercodes';
+import { delay, sendMessageToChatbot, getChatbotMessages } from '../modules/remoteServices';
 
 interface Message {
   sender: string;
@@ -20,8 +20,6 @@ const Chatbot: React.FC = () => {
     setIsTransformed(!isTransformed);
   };
 
-
-
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -33,46 +31,18 @@ const Chatbot: React.FC = () => {
     setPlaceholder(true);
 
     try {
-      // Send message to the API
-      await fetch('https://chat.botpress.cloud/a3055457-eacf-4a5d-9ac0-a8d4505f1550/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-user-key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE3MzExNzE0NTF9.3pggYoXtQ29zCBIN7mBgyYp3kVnyC21wxKBvjPEzgOM'
-        },
-        body: JSON.stringify({
-          payload: {
-            type: "text",
-            text: userMessage.text
-          },
-          conversationId: "conv_01JDYX3R9BDWT3GZX23865KVX8"
-        }),
-      });
 
-      (async () => {
+      await sendMessageToChatbot(userMessage.text);
 
-        //LOADING...
+      await delay(8000);
 
-        await delay(8000); // Wait for 5 seconds
+      const botResponse = await getChatbotMessages();
 
-        const response = await fetch('https://chat.botpress.cloud/a3055457-eacf-4a5d-9ac0-a8d4505f1550/conversations/conv_01JDYX3R9BDWT3GZX23865KVX8/messages', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-user-key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE3MzExNzE0NTF9.3pggYoXtQ29zCBIN7mBgyYp3kVnyC21wxKBvjPEzgOM'
-          }
-        });
+      const botMessage: Message = { sender: 'bot', text: botResponse.messages[0].payload.text };
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch API response');
-        }
+      setMessages((prev) => [...prev, botMessage]);
 
-        const data = await response.json();
-        console.log(data)
-        const botMessage: Message = { sender: 'bot', text: data.messages[0].payload.text };
-        setMessages((prev) => [...prev, botMessage]);
-        setPlaceholder(false);
-      })();
+      setPlaceholder(false);
 
     } catch (error) {
       console.error('Error:', error);
@@ -93,14 +63,14 @@ const Chatbot: React.FC = () => {
 
     <div className={`fixed bottom-5 right-5 flex flex-col max-w-lg mx-auto bg-purple-400 rounded-lg shadow-md ${isTransformed ? 'h-96 w-full p-4 animate-slide-in' : 'animate-slide-out'
       }`}>
-<div className="flex justify-end px-2 py-1 ">
-      <button
-        onClick={toggleChatbot}
-        className={`text-sm text-gray-600border rounded hover:bg-purple-100 ${isTransformed ? 'block' : 'hidden'}`}
-      >
-        <img src="https://img.icons8.com/ios_filled/512/delete-sign--v2.png" alt="Chat" className="w-8 h-8" />
-      </button>
-    </div>
+      <div className="flex justify-end px-2 py-1 ">
+        <button
+          onClick={toggleChatbot}
+          className={`text-sm text-gray-600border rounded hover:bg-purple-100 ${isTransformed ? 'block' : 'hidden'}`}
+        >
+          <img src="https://img.icons8.com/ios_filled/512/delete-sign--v2.png" alt="Chat" className="w-8 h-8" />
+        </button>
+      </div>
 
       {/* Chatbot Icon */}
       {!isOpen && (
@@ -117,7 +87,7 @@ const Chatbot: React.FC = () => {
       {isOpen && (
 
         <div className={`chatbox overflow-y-auto h-72 flex-1 mb-4 space-y-4 p-2 bg-white rounded-lg`}>
-          
+
           {messages.map((message, index) => (
             <div
               key={index}
@@ -126,8 +96,8 @@ const Chatbot: React.FC = () => {
             >
               <div
                 className={`px-4 py-2 rounded-lg ${message.sender === 'user'
-                    ? 'bg-purple-500 text-white text-right'
-                    : 'bg-purple-300 text-black text-left'
+                  ? 'bg-purple-500 text-white text-right'
+                  : 'bg-purple-300 text-black text-left'
                   }`}
               >
                 {message.text}

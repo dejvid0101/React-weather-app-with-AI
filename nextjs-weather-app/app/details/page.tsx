@@ -1,36 +1,9 @@
 import React from 'react'
+import { getWeatherInfo } from '../modules/remoteServices';
 import Currentweather from './components/currentweather'
 import Forecast3days from './components/forecast3days'
 import TodayComponent from './components/today_component';
 import TomorrowComponent from './components/tomorrow_component';
-
-
-async function getWeatherInfo(cityName: any) {
-  // Construct the URL for the WeatherAPI with the city name and API key
-  const weatherApiKey = 'b354bae2692245ab994190139241103'; // API key
-  const weatherApiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${cityName}&days=3`;
-
-  try {
-      // Fetch the weather data for the given city
-      const responseWeather = await fetch(weatherApiUrl, { cache: 'no-store' });
-
-      // Check if the request was successful
-      if (!responseWeather.ok) {
-          throw new Error('Error fetching weather data');
-      }
-
-      // Parse the response as JSON
-      const dataWeather = await responseWeather.json();
-
-      // Return the fetched weather data
-      return dataWeather;
-
-  } catch (error) {
-      // Handle any errors that occur during the fetch
-      console.error('Error fetching weather data:', error);
-      return null; // Or handle the error as needed
-  }
-}
 
 //page server component receives url params through props
 export default async function page({searchParams}: {searchParams?: { [key: string]: string | string[] | undefined };}) {

@@ -72,7 +72,7 @@ export async function getCities() {
       return data;
     } catch (error) {
       console.error('Error fetching cities:', error);
-      throw error; // Propagate the error to handle it where the function is called
+      throw error;
     }
   }
 
